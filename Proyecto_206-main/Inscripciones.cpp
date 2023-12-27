@@ -7,33 +7,24 @@
 #include <vector>
 #include <algorithm>
 #include "Inscripcion.cpp"
+#include "Registros.cpp"
 
 class Inscripciones
 {
 private:
     std::vector<Inscripcion> inscripciones;
-
+    static std::string RUTA() {
+        "C:\\Users\\lmher\\Desktop\\Blanca\\Proyecto_206-main\\inscripciones.txt";
+    };
 public:
     Inscripciones()
     {
-        std::ifstream archivo("C:\\Users\\lmher\\Desktop\\Blanca\\Proyecto_206-main\\inscripciones.txt");
-
-        if (!archivo.is_open())
+        std::vector<std::vector<std::string>> lista = Fichero::accionArchivo(Inscripciones::RUTA());
+        for (auto &&elemento : lista)
         {
-            std::cerr << "Error al abrir el archivo de inscripcion." << std::endl;
-            exit(1);
-        }
-
-        std::string linea;
-        while (std::getline(archivo, linea))
-        {
-            int delimiter = linea.find_first_of("-->");
-            std::string nombre = linea.substr(0, delimiter),
-                        contrasena = linea.substr(delimiter + 3, linea.length() - delimiter);
-            Inscripcion inscripcion(nombre, contrasena);
+            Inscripcion inscripcion = Inscripcion::parsear(elemento);
             this->inscripciones.push_back(inscripcion);
         }
-        archivo.close();
     }
 
     bool inscribirUsuario(std::string &usuario, int &aforo)

@@ -8,30 +8,23 @@
 #include <algorithm>
 #include "Evento.cpp"
 #include "Registros.cpp"
+#include "Utils.h"
 
 // Nombre; Tipo; Descripcion; Fecha Inicio; Fecha Fin; Precio; Aforo;  Duracion
 class Eventos
 {
 private:
     std::vector<Evento> eventos;
-
+    static std::string RUTA() {
+        return "C:\\Users\\lmher\\Desktop\\Blanca\\Proyecto_206-main\\eventos.txt";
+    };
 public:
     Eventos()
     {
-        std::ifstream archivo("C:\\Users\\lmher\\Desktop\\Blanca\\Proyecto_206-main\\eventos.txt");
-
-        if (!archivo.is_open())
+        std::vector<std::vector<std::string>> lista = Fichero::accionArchivo(Eventos::RUTA());
+        for (auto &&elemento : lista)
         {
-            std::cerr << "Error al abrir el archivo de registro." << std::endl;
-            exit(1);
-        }
-
-        std::string linea;
-        std::getline(archivo, linea); // Saltamos la primera línea
-        while (std::getline(archivo, linea))
-        {
-            std::vector<std::string> trozos = split(linea, ';');
-            Evento evento = Evento::parsear(trozos);
+            Evento evento = Evento::parsear(elemento);
             this->eventos.push_back(evento);
         }
     }
@@ -137,7 +130,7 @@ public:
     }
 
     Evento obtenerEvento(std::string &nombre){
-        Evento res;
+        Evento res = Evento::empty();
         for (auto &&evento : this->eventos)
         {
             if(evento.getNombre() == nombre){

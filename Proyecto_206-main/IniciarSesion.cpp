@@ -7,7 +7,6 @@
 #include <vector>
 #include <algorithm>
 #include <regex>
-#include "Eventos.cpp"
 #include "Inscripciones.cpp"
 
 class IniciarSesion

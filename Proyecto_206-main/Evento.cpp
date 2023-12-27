@@ -2,7 +2,7 @@
 #include <iostream>
 #include <iosfwd>
 #include <ctime>
-#include "Utils.cpp"
+#include "Utils.h"
 
 class Evento
 {
@@ -34,6 +34,14 @@ public:
         this->aforo = aforo;
         this->duracion = duracion;
     };
+
+    static Evento empty(){
+        std::string strVacio = "";
+        int intVacio = 0;
+        std::time_t timeVacio = time(0);
+        Tipo tipoVacio = Tipo::ERROR;
+        return Evento(strVacio, tipoVacio, strVacio, timeVacio, timeVacio, intVacio, intVacio, intVacio);
+    }
 
     std::string getNombre()
     {
@@ -127,12 +135,12 @@ public:
                     strDuracion = std::to_string(this->duracion),
                     strFechaInicio = std::ctime(&this->fechaInicio),
                     strFechaFin = std::ctime(&this->fechaFin),
-                    strTipo = this->getTipoLikeString(),
-                    res = "";
+                    strTipo = this->getTipoLikeString();
         std::vector<std::string> atributos = {nombre, strTipo, descripcion, strFechaInicio, strFechaFin, strPrecio, strAforo, strDuracion};
-        for (auto &&atributo : atributos)
+        std::string res = atributos[0];
+        for (size_t i = 1; i < atributos.size(); i++)
         {
-            res += atributo + ";";
+            res += ";" + atributos[i];
         }
         return res;
     }
