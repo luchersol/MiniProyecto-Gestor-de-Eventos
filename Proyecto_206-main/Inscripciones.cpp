@@ -1,20 +1,14 @@
-#include <string>
-#include <iostream>
-#include <fstream>
-#include <ctime>
-#include <sstream>
-#include <iomanip> 
-#include <vector>
-#include <algorithm>
 #include "Inscripcion.cpp"
 #include "Registros.cpp"
+#include "Eventos.cpp"
+#include "Fichero.hpp"
 
 class Inscripciones
 {
 private:
     std::vector<Inscripcion> inscripciones;
     static std::string RUTA() {
-        "C:\\Users\\lmher\\Desktop\\Blanca\\Proyecto_206-main\\inscripciones.txt";
+        return "C:\\Users\\lmher\\Desktop\\Blanca\\Proyecto_206-main\\inscripciones.txt";
     };
 public:
     Inscripciones()
@@ -25,9 +19,9 @@ public:
             Inscripcion inscripcion = Inscripcion::parsear(elemento);
             this->inscripciones.push_back(inscripcion);
         }
-    }
+    };
 
-    bool inscribirUsuario(std::string &usuario, int &aforo)
+    bool inscribirUsuario(std::string &usuario, Eventos eventos)
     {
         std::string nombreEvento;
         std::cout << "Introduce nombre del evento: " << std::endl;
@@ -43,7 +37,7 @@ public:
         }
 
         int contador = this->contarAforoInscritos(nombreEvento);
-
+        int aforo = eventos.obtenerAforo(nombreEvento);
         if (contador < aforo)
         {
             this->inscripciones.push_back(inscripcion);
@@ -54,7 +48,7 @@ public:
             std::cout << "El aforo esta completo. " << std::endl;
         }
 
-    }
+    };
 
     int contarAforoInscritos(std::string nombreEvento)
     {
@@ -66,16 +60,14 @@ public:
             }
         }
         return aforo;
-    }
+    };
 
-    bool existeInscripcion(Inscripcion inscripcion)
+    bool existeInscripcion(Inscripcion in)
     {
-        std::string inscrip = inscripcion.getUsuario() + "-->" + inscripcion.getNombreEvento();
-
         bool existe = false;
         for (auto &&inscripcion : this->inscripciones)
         {
-            if (inscripcion.toString() == inscrip)
+            if (inscripcion.equals(in))
             {
                 existe = true;
                 break;
@@ -83,5 +75,5 @@ public:
         }
 
         return existe;
-    }
+    };
 };

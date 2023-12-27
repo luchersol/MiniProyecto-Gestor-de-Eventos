@@ -1,14 +1,6 @@
-#include <string>
-#include <iostream>
-#include <fstream>
-#include <ctime>
-#include <sstream>
-#include <iomanip>
-#include <vector>
-#include <algorithm>
 #include "Registro.cpp"
 #include "Utils.h"
-#include "Fichero.cpp"
+#include "Fichero.hpp"
 
 class Registros
 {
@@ -38,12 +30,13 @@ public:
             std::cout << "Introduce nombre:" << std::endl;
             std::cin >> nombre;
             isValid = !existeRegistro(nombre);
-            if (isValid)
+            if (!isValid){
                 std::cout << "Este usuario ya existe." << std::endl;
-            std::cout << "¿Quieres intentar de nuevo? (Introduce 'Y' para confirmar)";
-            std::string response;
-            std::cin >> response;
-            tryAgain = response == "Y";
+                std::cout << "¿Quieres intentar de nuevo? (Introduce 'Y' para confirmar)";
+                std::string response;
+                std::cin >> response;
+                tryAgain = response == "Y";
+            }
         } while (!isValid && tryAgain);
         
         if(isValid){

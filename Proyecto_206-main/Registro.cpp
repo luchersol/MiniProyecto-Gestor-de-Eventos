@@ -38,4 +38,8 @@ public:
     std::string toString(){
         return this->usuario + " " + this->contrasena;
     }
+
+    bool equals(Registro other){
+        return this->usuario == other.usuario && this->contrasena == other.contrasena;
+    }
 };

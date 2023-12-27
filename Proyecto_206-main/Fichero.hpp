@@ -1,3 +1,6 @@
+#ifndef FICHERO_HPP
+#define FICHERO_HPP
+
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -6,7 +9,6 @@
 #include <iomanip> 
 #include <vector>
 #include <algorithm>
-#include "Utils.h"
 
 class Fichero
 {
@@ -37,7 +39,7 @@ public:
         return res;
     }
 
-    static void lecturaArchivo(std::string ruta, std::vector<std::vector<std::string>> res)
+    static void lecturaArchivo(std::string ruta, std::vector<std::vector<std::string>> &res)
     {
         std::ifstream archivo(ruta);
         if (archivo.is_open())
@@ -123,3 +125,5 @@ public:
         }
     }
 };
+
+#endif

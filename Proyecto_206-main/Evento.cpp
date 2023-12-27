@@ -163,4 +163,16 @@ public:
                "Fecha fin: " + strFechaFin +
                "Duracion: " + strDuracion + "\n\n";
     };
+
+    bool equals(Evento other)
+    {
+        return this->nombre == other.nombre &&
+               this->tipo == other.tipo &&
+               this->descripcion == other.descripcion &&
+               this->precio == other.precio &&
+               this->aforo == other.aforo &&
+               this->fechaInicio == other.fechaInicio &&
+               this->fechaFin == other.fechaFin &&
+               this->duracion == other.duracion;
+    }
 };

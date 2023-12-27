@@ -1,14 +1,6 @@
-#include <string>
-#include <iostream>
-#include <fstream>
-#include <ctime>
-#include <sstream>
-#include <iomanip>
-#include <vector>
-#include <algorithm>
 #include "Evento.cpp"
-#include "Registros.cpp"
 #include "Utils.h"
+#include "Fichero.hpp"
 
 // Nombre; Tipo; Descripcion; Fecha Inicio; Fecha Fin; Precio; Aforo;  Duracion
 class Eventos
@@ -162,10 +154,9 @@ public:
         return aforo;
     }
 
-    bool guardarEvento(Evento evento)
+    void guardarEvento(Evento evento)
     {
         eventos.push_back(evento);
-        return true;
     }
 
     void modificarEvento()

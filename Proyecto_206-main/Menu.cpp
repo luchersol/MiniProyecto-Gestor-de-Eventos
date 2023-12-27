@@ -109,7 +109,7 @@ public:
                 this->eventos.listarEventos();
                 break;
             case 2:
-                this->eventos.inscribirUsuario(this->usuarioActual, this->eventos.obtenerAforo(nombreEvento));
+                this->inscripciones.inscribirUsuario(this->usuarioActual, this->eventos);
                 break;
             case 3:
                 this->cerrarSesion(cond);

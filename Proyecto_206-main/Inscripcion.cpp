@@ -37,4 +37,8 @@ public:
     std::string toString(){
         return this->usuario + "-->" + this->nombreEvento;
     }
+
+    bool equals(Inscripcion other){
+        return this->usuario == other.usuario && this->nombreEvento == other.nombreEvento;
+    }
 };
